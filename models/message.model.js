@@ -18,6 +18,11 @@ const MessageSchema = new Schema(
       ref: "Message",
       default: null,
     },
+    chatId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Chat",
+      required: [true, "Chat is Required"],
+    },
   },
   {
     timestamps: true,
@@ -32,6 +37,7 @@ export const Message = mongoose.model("Message", MessageSchema);
 //       message: "Hello!",
 //       sentBy: "66d991b1324b735da92f57bc",
 //       repliedId: "66d99d52382afbb707c94847",
+//       chatId: "66d9b2f98fd5af402e423e73",
 //     },
 //   ].forEach(async (msg) => {
 //     const NewMessage = new Message(msg);
