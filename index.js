@@ -4,6 +4,7 @@ const app = express();
 const port = 8000;
 
 connectToDb();
+// addMessageToDB();
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

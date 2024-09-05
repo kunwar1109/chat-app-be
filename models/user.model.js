@@ -42,23 +42,3 @@ const UserSchema = new Schema({
 });
 
 export const User = mongoose.model("User", UserSchema);
-
-export const addUserToDB = () => {
-  [
-    {
-      firstName: "Test",
-      lastName: "User",
-      userName: "test_101",
-      email: "test@gmail.com",
-      password: "Test@@1!1",
-    },
-  ].forEach(async (user) => {
-    const NewUser = new User(user);
-    try {
-      await NewUser.save();
-      console.log("added");
-    } catch (error) {
-      console.error("cannot add to Databse", error);
-    }
-  });
-};
