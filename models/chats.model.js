@@ -2,29 +2,38 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const ChatSchema = new Schema({
-  chatType: {
-    type: String,
-    enum: ["PVT", "GROUP"],
-    default: "PVT",
-  },
-  members: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: [true, "Members are required"],
+const ChatSchema = new Schema(
+  {
+    chatType: {
+      type: String,
+      enum: ["PVT", "GROUP"],
+      default: "PVT",
     },
-  ],
-  name: {
-    type: String,
+    totalChats: {
+      type: Number,
+      default: 0,
+    },
+    members: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, "Members are required"],
+      },
+    ],
+    name: {
+      type: String,
+    },
+    displayPicture: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
   },
-  displayPicture: {
-    type: String,
-  },
-  description: {
-    type: String,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 export const Chat = mongoose.model("Chat", ChatSchema);
 

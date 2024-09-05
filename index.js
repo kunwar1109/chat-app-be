@@ -1,5 +1,6 @@
 import express from "express";
 import { connectToDb } from "./db/connection.js";
+
 const app = express();
 const port = 8000;
 
