@@ -7,7 +7,7 @@ app.use(express.json());
 const port = 8000;
 
 connectToDb();
-// addMessageToDB();
+// addChatToDB();
 app.use("/chats", chatRouter);
 app.use("/users", userRouter);
 app.use("/auth", authRouter);

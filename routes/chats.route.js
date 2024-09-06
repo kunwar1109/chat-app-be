@@ -1,5 +1,4 @@
 import express from "express";
-import mongoose from "mongoose";
 import { Chat } from "../models/chats.model.js";
 const chatRouter = express.Router();
 
@@ -11,7 +10,7 @@ chatRouter
     try {
       const chats = await Chat.find({
         members: userId,
-      });
+      }).sort({ updatedAt: "desc" });
 
       res.status(200).json({
         success: true,
