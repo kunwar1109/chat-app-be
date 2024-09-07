@@ -1,8 +1,9 @@
 import express from "express";
 import { Chat } from "../models/chats.model.js";
 import pkg from "lodash";
+import mongoose from "mongoose";
 const chatRouter = express.Router();
-const { extend, pull } = pkg;
+const { extend } = pkg;
 //create  a chat and get chats for a user
 chatRouter
   .route("/")
@@ -61,19 +62,23 @@ chatRouter
     const { chatId } = req.params;
     const { type, update } = req.body;
     try {
-      const chat = await Chat.findById(chatId);
+      let chat = await Chat.findById(chatId);
       if (chat) {
         if (type === "MEMBER_ADD" || type === "MEMBER_REM") {
+          console.log(type);
           if (type === "MEMBER_ADD") {
             update.forEach((data) => {
               chat.members.push(data);
             });
           } else {
-            const remMembers = pull(chat.members, ...update);
-            console.log(remMembers);
+            console.log(update, "here");
+            //remove the members
+            const filetered = chat.members.filter((data) => data != update);
+            console.log(filetered);
+            chat.members = filetered;
           }
         } else {
-          chat = extend(chat, update);
+          extend(chat, update);
         }
         await chat.save();
         res.status(200).json({ success: true, chat, message: "Updated" });
