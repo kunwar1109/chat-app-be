@@ -78,6 +78,7 @@ chatRouter
             chat.members = filetered;
           }
         } else {
+          //update should be an object with key of updating the document entry
           extend(chat, update);
         }
         await chat.save();
