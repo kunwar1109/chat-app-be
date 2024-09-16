@@ -1,7 +1,6 @@
 import express from "express";
 import { Chat } from "../models/chats.model.js";
 import pkg from "lodash";
-import mongoose from "mongoose";
 const chatRouter = express.Router();
 const { extend } = pkg;
 //create  a chat and get chats for a user
@@ -86,7 +85,9 @@ chatRouter
       } else {
         res.status(404).json({ success: false, message: "Chat Not Found" });
       }
-    } catch (error) {}
+    } catch (error) {
+      res.status(400).json({ success: false, message: error.message });
+    }
   });
 
 export { chatRouter };
