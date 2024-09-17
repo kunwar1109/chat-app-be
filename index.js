@@ -7,13 +7,22 @@ import {
   userRouter,
 } from "./routes/index.js";
 import { createServer } from "node:http";
+import cors from "cors";
+import { Server } from "socket.io";
 
 const app = express();
+app.use(cors());
 const server = createServer(app);
 app.use(express.json());
 const port = 8000;
 
 connectToDb();
+const io = new Server(server, {});
+
+io.on("connection", (socket) => {
+  console.log("A user connected");
+});
+
 // addChatToDB();
 app.use("/chats", chatRouter);
 app.use("/users", userRouter);
